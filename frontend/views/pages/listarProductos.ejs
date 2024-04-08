@@ -1,0 +1,32 @@
+<%- include('../partials/encabezado'); %>
+
+
+<table>
+    <thead>
+        <th>Referencia</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Descripcion</th>
+            <th>Categoria</th>
+            <th>Imagenes</th>
+            <th>Acciones</th>
+    </thead>
+    <tbody>
+        
+<% listadoProductos.forEach(producto => { %>
+
+    <tr>
+            <td><%= producto.feferencia %></td>
+            <td><%= producto.nombre %></td>
+            <td><%= producto.precio %></td>
+            <td><%= producto.descripcion %></td>
+            <td><%= producto.categoria %></td>
+            <td><%= producto.imagenes %></td>
+    </tr>
+
+<%})%>
+    </tbody>
+</table>
+
+<%- include('../partials/footer'); %>
+

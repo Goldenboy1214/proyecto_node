@@ -1,3 +1,4 @@
+
 let modeloProducto = require('./backend/models/productos.models')
 
 const exp = require('express');
@@ -8,6 +9,39 @@ app.use(logger('dev'));
 
 app.use(exp.urlencoded({extended: false}));
 app.use(exp.json())
+
+/*###############################
+<Aca le decimos a express cual es la ruta static y vies por medio del __dirmanem>
+#################################*/
+
+const path = require('path');
+app.use(exp.static(path.join(__dirname,'/static'))); //
+app.set('view engine','ejs');
+app.set('views', path.join(__dirname,'./frontend/views'))
+
+
+app.get('/formularioProducto', (req,res)=>{
+    res.render('pages/formularioProducto')
+})
+
+
+/*#######################<Función de listar productos>#################################*/
+
+app.get('/listarProductos', async (req,res)=>{
+    console.log('entra')
+    let listadoProductos = await modeloProducto.find();
+    if(listadoProductos)
+        res.render('pages/listarProductos',
+        {
+            "listadoProductos":listadoProductos
+        })
+    else
+        res.render('pages/listarProductos',
+        {
+            "listadoProductos":listadoProductos
+        }
+        );
+});
 
 /*#######################<FUNCIONES>#################################*/
 
@@ -64,11 +98,6 @@ app.post('/productos', async(req,res)=>{
 });
 
 /*Update*/
-
-app.delete('/productos/:ref', async(req,res)=>{
-
-});
-
 
 app.put('/productos/:ref', async(req,res)=>{
 
